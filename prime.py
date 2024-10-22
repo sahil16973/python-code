@@ -1,3 +1,5 @@
+import sys
+
 def is_prime(num):
     """Check if a number is prime."""
     if num <= 1:
@@ -9,25 +11,24 @@ def is_prime(num):
 
 def main():
     """Main function to execute the prime checker."""
-    while True:
-        try:
-            # Take user input
-            number = int(input("Enter a positive integer (or type 'exit' to quit): "))
-            if number < 0:
-                print("Please enter a positive integer.")
-                continue
-            
-            # Check if the number is prime
-            if is_prime(number):
-                print(f"{number} is a prime number.")
-            else:
-                print(f"{number} is not a prime number.")
+    if len(sys.argv) < 2:
+        print("Usage: python prime.py <positive_integer>")
+        return
 
-        except ValueError:
-            print("Invalid input. Please enter a positive integer.")
-        except KeyboardInterrupt:
-            print("\nExiting the program. Goodbye!")
-            break
+    try:
+        number = int(sys.argv[1])
+        if number < 0:
+            print("Please enter a positive integer.")
+            return
+
+        # Check if the number is prime
+        if is_prime(number):
+            print(f"{number} is a prime number.")
+        else:
+            print(f"{number} is not a prime number.")
+
+    except ValueError:
+        print("Invalid input. Please provide a positive integer.")
 
 if __name__ == "__main__":
     main()
